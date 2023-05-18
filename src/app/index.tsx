@@ -1,7 +1,10 @@
-import MainLayout from '../shared/ui/MainLayout'
+import { MainLayout } from '../shared/ui'
 import Router from './Router'
+import { useCheckAuth } from '../features/auth'
 
 function App() {
+	const v = useCheckAuth()
+	console.log({ v })
 	return (
 		<MainLayout>
 			<Router />

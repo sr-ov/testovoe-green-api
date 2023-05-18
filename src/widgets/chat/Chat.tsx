@@ -1,9 +1,14 @@
 import { FC } from 'react'
+import { CreateMessage } from '../../features/create-message'
 
 interface ChatProps {}
 
 const Chat: FC<ChatProps> = (props) => {
-	return <div className="col-span-8 px-5"></div>
+	return (
+		<div className="col-span-9 px-5 grid grid-rows-[1fr_auto] py-5">
+			<CreateMessage />
+		</div>
+	)
 }
 
 export default Chat
