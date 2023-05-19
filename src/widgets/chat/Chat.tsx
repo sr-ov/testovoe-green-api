@@ -6,7 +6,7 @@ interface ChatProps {}
 const Chat: FC<ChatProps> = (props) => {
 	return (
 		<div className="col-span-9 px-5 grid grid-rows-[1fr_auto] py-5">
-			<CreateMessage />
+			<CreateMessage className="mt-16" isChatSelected={false} />
 		</div>
 	)
 }

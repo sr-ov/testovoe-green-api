@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { HomePage, LoginPage } from '../pages'
+import { HomePage } from '../pages'
 
 const router = createBrowserRouter([
 	// {

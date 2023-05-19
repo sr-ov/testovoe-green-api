@@ -8,7 +8,7 @@ const Input: FC<IInputProps> = ({ className, ...props }) => {
 	return (
 		<input
 			className={cn(
-				'rounded-lg ring-1 bg-[transparent] text-c2 placeholder:text-c4 ring-c3 px-5 py-[0px]',
+				'rounded-lg ring-1 bg-[transparent] text-c2 placeholder:text-c4 ring-c3 px-5',
 				className
 			)}
 			{...props}

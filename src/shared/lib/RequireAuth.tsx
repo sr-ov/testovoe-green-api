@@ -13,8 +13,7 @@ const RequireAuth: FC<RequireAuthProps> = ({
 	children,
 	...props
 }) => {
-	return <>{children}</>
-	// return isAllowed ? <>{children}</> : <Navigate to={redirectTo} replace />
+	return isAllowed ? <>{children}</> : <Navigate to={redirectTo} replace />
 }
 
 export default RequireAuth

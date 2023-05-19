@@ -1,3 +1,5 @@
+import { create } from 'zustand'
+
 export interface IMessage {
 	id: string
 	text: string
@@ -9,6 +11,7 @@ export interface IChat {
 	number: string
 	messages: IMessage[]
 }
+interface Actions {}
 
 export const chats: IChat[] = [
 	{
@@ -34,3 +37,5 @@ export const chats: IChat[] = [
 		],
 	},
 ]
+
+export const useViewer = create<IViewerStore>((set) => ({}))

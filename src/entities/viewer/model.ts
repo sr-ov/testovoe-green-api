@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 export interface IViewer {
 	isAuth: boolean
@@ -6,7 +7,7 @@ export interface IViewer {
 	apiTokenInstance: string
 }
 
-export interface IViewerStore extends IViewer {
+interface Actions {
 	login: (idInstance: string, apiTokenInstance: string) => void
 	logout: () => void
 }
@@ -17,21 +18,29 @@ const initialState = (): IViewer => ({
 	apiTokenInstance: '',
 })
 
-export const useViewer = create<IViewerStore>((set) => ({
-	...initialState(),
+export const useViewer = create<IViewer & Actions>()(
+	persist(
+		(set) => ({
+			...initialState(),
 
-	login(idInstance: string, apiTokenInstance: string) {
-		set(() => ({
-			isAuth: true,
-			idInstance,
-			apiTokenInstance,
-		}))
-	},
+			login(idInstance: string, apiTokenInstance: string) {
+				set(() => ({
+					isAuth: true,
+					idInstance,
+					apiTokenInstance,
+				}))
+			},
 
-	logout() {
-		set(() => initialState())
-	},
-}))
+			logout() {
+				set(() => initialState())
+			},
+		}),
+		{
+			name: 'viewer',
+			storage: createJSONStorage(() => window.localStorage),
+		}
+	)
+)
 
 export function useIsAuth() {
 	const isAuth = useViewer((state) => state.isAuth)

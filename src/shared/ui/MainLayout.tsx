@@ -5,7 +5,7 @@ interface MainLayoutProps extends DivProps {}
 
 const MainLayout: FC<MainLayoutProps> = ({ children, ...props }) => {
 	return (
-		<div className="min-h-screen">
+		<div className="min-h-screen" id="wrapper">
 			<div className="max-w-[1024px] px-4 mx-auto min-h-screen">{children}</div>
 		</div>
 	)
