@@ -10,24 +10,6 @@ const Messages: FC<MessagesProps> = () => {
 
 	return (
 		<ul className="flex flex-col gap-10 h-full mx-5 before:block before:flex-1">
-			<li className="">
-				<Message className="rounded-[0px_24px_24px_24px] !border-c2">
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui maiores
-					aspernatur dolor, quidem recusandae est doloremque iure molestias quis
-					asperiores.
-				</Message>
-			</li>
-			<li className="">
-				<Message className="rounded-[0px_24px_24px_24px] !border-c2">
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui maiores
-					aspernatur dolor, quidem recusandae est doloremque iure molestias quis
-					asperiores.
-				</Message>
-			</li>
-			<li className="text-end">
-				<Message className="rounded-[24px_24px_0px_24px]">Lorem ipsum</Message>
-			</li>
-
 			{messages.map(({ isWhatsAppUser, id, text }) => {
 				return (
 					<li className={cn(!isWhatsAppUser && 'text-end')} key={id}>
