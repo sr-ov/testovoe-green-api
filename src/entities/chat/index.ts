@@ -1,2 +1,3 @@
 export * from './model'
-export * from './ui'
+export { default as Chats } from './ui/Chats'
+export { default as Messages } from './ui/Messages'

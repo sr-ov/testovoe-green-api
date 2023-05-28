@@ -1,27 +1,20 @@
 import { FC } from 'react'
 import cn from 'clsx'
 import { Button } from '../../../shared/ui'
-import { chats } from '..'
+import { useChat } from '..'
 
 interface ChatsProps {}
 
-const Chats: FC<ChatsProps> = (props) => {
-	return (
+const Chats: FC<ChatsProps> = () => {
+	const phone = useChat(({ phone }) => phone)
+
+	return !phone ? null : (
 		<ul className="space-y-6">
-			{chats.map((c, i) => {
-				return (
-					<li key={c.id}>
-						<Button
-							className={cn(
-								'py-3 px-4 w-full text-right ring-1 ring-c3',
-								i == 0 && 'bg-c3 text-c1'
-							)}
-						>
-							{c.number}
-						</Button>
-					</li>
-				)
-			})}
+			<li>
+				<Button className={cn('py-3 px-4 w-full text-right ring-1 ring-c3')}>
+					{phone}
+				</Button>
+			</li>
 		</ul>
 	)
 }

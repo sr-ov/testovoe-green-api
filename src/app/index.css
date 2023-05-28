@@ -29,9 +29,11 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	background-color: var(--c1);
-	/* filter: blur(50px); */
 }
-
+:disabled {
+	opacity: 0.25;
+	cursor: not-allowed;
+}
 h1 {
 	font-size: 3.2em;
 	line-height: 1.1;

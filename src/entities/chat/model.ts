@@ -3,39 +3,29 @@ import { create } from 'zustand'
 export interface IMessage {
 	id: string
 	text: string
-	author: string
+	isWhatsAppUser: boolean
 }
 
-export interface IChat {
-	id: string
-	number: string
+interface IChat {
+	chatId: string
+	phone: string
 	messages: IMessage[]
 }
-interface Actions {}
 
-export const chats: IChat[] = [
-	{
-		id: '1',
-		number: '+7 222 744 11 21',
-		messages: [
-			{
-				id: '1',
-				text: 'hello world!!!',
-				author: '1',
-			},
-		],
-	},
-	{
-		id: '2',
-		number: '+7 144 467 99 00',
-		messages: [
-			{
-				id: '1',
-				text: 'bye world!!!',
-				author: '1',
-			},
-		],
-	},
-]
+interface Actions {
+	addMessage: (payload: IMessage) => void
+	setChat: (chatId: string, phone: string) => void
+}
 
-export const useViewer = create<IViewerStore>((set) => ({}))
+export const useChat = create<IChat & Actions>((set) => ({
+	chatId: '',
+	phone: '',
+	messages: [],
+
+	addMessage(payload) {
+		set((state) => ({ ...state, messages: state.messages.concat(payload) }))
+	},
+	setChat(chatId: string, phone: string) {
+		set((state) => ({ ...state, chatId, phone }))
+	},
+}))

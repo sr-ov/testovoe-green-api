@@ -6,7 +6,7 @@ import { useTextField } from '../../shared/lib'
 
 interface LoginFormProps {}
 
-const LoginForm: FC<LoginFormProps> = (props) => {
+const LoginForm: FC<LoginFormProps> = () => {
 	const navigate = useNavigate()
 	const login = useLogin()
 	const { value: instanceValue, onChange: onChangeInstanceValue } =

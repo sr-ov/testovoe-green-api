@@ -1,10 +1,9 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
+import { GreenApiInstance } from '../../shared/types'
 
-export interface IViewer {
+export interface IViewer extends GreenApiInstance {
 	isAuth: boolean
-	idInstance: string
-	apiTokenInstance: string
 }
 
 interface Actions {

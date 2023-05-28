@@ -1,30 +1,42 @@
-import { FC, FormEvent } from 'react'
+import { FC, FormEvent, useRef } from 'react'
 import { useToggle } from 'react-use'
 import ReactModal from 'react-modal'
 import { Button, Input } from '../../shared/ui'
 import addChatIcon from '../../assets/icons/add-chat.svg'
 import { useTextField } from '../../shared/lib'
+import { toggleBlurFilter } from '.'
+import { useChat } from '../../entities/chat'
 
 ReactModal.setAppElement('#root')
 
-interface CreateChatProps {
-	selectChat: VoidFunction
-}
+interface CreateChatProps {}
 
-const tggleBlur = () => {
-	document.getElementById('wrapper')?.classList.toggle('blur-[50px]')
-}
-
-const CreateChat: FC<CreateChatProps> = ({ selectChat, ...props }) => {
+const CreateChat: FC<CreateChatProps> = () => {
+	const inputRef = useRef<HTMLInputElement>(null)
+	const setChat = useChat(({ setChat }) => setChat)
 	const [open, toggleOpen] = useToggle(false)
 	const onOpenModal = () => toggleOpen(true)
 	const onCloseModal = () => toggleOpen(false)
-	const { value: phoneValue, onChange: onChangePhoneValue } = useTextField()
+	const {
+		value: phoneValue,
+		onChange: onChangePhoneValue,
+		isEmptyValue,
+	} = useTextField()
 
 	function onSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault()
+		const chatId = phoneValue.replace(/[^0-9]/g, '') + '@c.us'
+		setChat(chatId, phoneValue)
+		onCloseModal()
+	}
 
-		selectChat()
+	function onAfterOpen() {
+		toggleBlurFilter()
+		inputRef.current?.focus()
+	}
+	function onAfterClose() {
+		toggleBlurFilter()
+		inputRef.current?.blur()
 	}
 
 	return (
@@ -38,8 +50,8 @@ const CreateChat: FC<CreateChatProps> = ({ selectChat, ...props }) => {
 			<ReactModal
 				isOpen={open}
 				onRequestClose={onCloseModal}
-				onAfterOpen={tggleBlur}
-				onAfterClose={tggleBlur}
+				onAfterOpen={onAfterOpen}
+				onAfterClose={onAfterClose}
 			>
 				<form className="flex space-x-2.5" onSubmit={onSubmit}>
 					<Input
@@ -48,8 +60,13 @@ const CreateChat: FC<CreateChatProps> = ({ selectChat, ...props }) => {
 						className="w-full rounded-lg ring-1 ring-c3 px-5 py-2.5"
 						value={phoneValue}
 						onChange={onChangePhoneValue}
+						ref={inputRef}
 					/>
-					<Button type="submit" className="rounded-lg bg-c2 px-5 py-2 text-c1">
+					<Button
+						type="submit"
+						className="rounded-lg bg-c2 px-5 py-2 text-c1"
+						disabled={isEmptyValue}
+					>
 						<img src={addChatIcon} alt="" aria-hidden="true" width={38} />
 					</Button>
 				</form>

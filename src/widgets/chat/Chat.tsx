@@ -1,12 +1,16 @@
 import { FC } from 'react'
 import { CreateMessage } from '../../features/create-message'
+import { Messages } from '../../entities/chat'
 
 interface ChatProps {}
 
-const Chat: FC<ChatProps> = (props) => {
+const Chat: FC<ChatProps> = () => {
 	return (
-		<div className="col-span-9 px-5 grid grid-rows-[1fr_auto] py-5">
-			<CreateMessage className="mt-16" isChatSelected={false} />
+		<div className="col-span-9 grid grid-rows-[1fr_auto] py-10 overflow-y-hidden h-screen">
+			<div className="overflow-y-auto scroll-smooth">
+				<Messages />
+			</div>
+			<CreateMessage className="mt-10" />
 		</div>
 	)
 }

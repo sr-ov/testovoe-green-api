@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, useState, useCallback } from 'react'
+import { isEmptyStr } from '..'
 
 export type TextField = HTMLTextAreaElement & HTMLInputElement
 
@@ -24,5 +25,6 @@ export const useTextField = (initialValue = '') => {
 		onChange,
 		resetValue,
 		setEmptyValue,
+		isEmptyValue: isEmptyStr(value),
 	}
 }

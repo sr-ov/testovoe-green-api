@@ -11,7 +11,6 @@ const RequireAuth: FC<RequireAuthProps> = ({
 	isAllowed,
 	redirectTo = '/login',
 	children,
-	...props
 }) => {
 	return isAllowed ? <>{children}</> : <Navigate to={redirectTo} replace />
 }
