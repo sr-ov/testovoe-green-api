@@ -16,7 +16,7 @@ const LoginForm: FC<LoginFormProps> = () => {
 	function onSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 
-		if (!instanceValue.trim() && !tokenValue.trim()) {
+		if (!instanceValue.trim() || !tokenValue.trim()) {
 			return
 		}
 
