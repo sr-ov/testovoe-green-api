@@ -23,7 +23,3 @@ export function useLogout() {
 	const logout = useViewer((state) => state.logout)
 	return logout
 }
-
-export function useIsAuth() {
-	return useViewer((state) => state.isAuth)
-}
